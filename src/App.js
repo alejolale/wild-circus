@@ -1,10 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import NavBar from './components/NavBar';
+import { Route, Switch } from 'react-router-dom';
+import Login from './components/Login';
 
-function App() {
+
+const App = () => {
+  const [authenticted, setAuthenticated] = useState(localStorage['circus-token']);
   return (
-    <div className="App" />
+    <Switch>
+      <Route exact path="/">
+        <div className="App">
+          <NavBar></NavBar>
+        </div>
+      </Route>
+      <Route path="/login">
+        <Login setAuthenticated={setAuthenticated}></Login>
+      </Route>
+
+    </Switch>
   );
 }
 
