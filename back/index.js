@@ -5,7 +5,10 @@ const jwt = require('jsonwebtoken');
 const expressJWT = require('express-jwt');
 const { Admin } = require('./models/');
 
+const cors = require('cors');
 const app = express();
+//not good for production !!
+app.use(cors());
 const port = 4000;
 
 const secret = process.env.JWT_SECRET;

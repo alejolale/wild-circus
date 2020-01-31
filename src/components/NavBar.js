@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavBar = () =>{
+const NavBar = ({auth}) =>{
     return (
         <div className="NavBar">
-            <Link to="/login">Admin</Link>
+            {!auth?
+                <Link to="/login">Admin</Link> :
+                <button>Log out</button>
+            }
         </div>
     )
 };

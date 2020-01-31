@@ -6,12 +6,14 @@ import Login from './components/Login';
 
 
 const App = () => {
-  const [authenticted, setAuthenticated] = useState(localStorage['circus-token']);
+
+  const [authenticated, setAuthenticated] = useState(localStorage['circus-token']);
+
   return (
     <Switch>
       <Route exact path="/">
         <div className="App">
-          <NavBar></NavBar>
+          <NavBar auth={authenticated}></NavBar>
         </div>
       </Route>
       <Route path="/login">

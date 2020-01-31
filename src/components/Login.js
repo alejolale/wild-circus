@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 
-function Login({ setIsAuth }) {
-  const [email, setEmail] = useState('');
+function Login({ setAuthenticated }) {
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [auth, setAuth] = useState();
@@ -15,11 +15,12 @@ function Login({ setIsAuth }) {
         className="Login__form"
         onSubmit={(e) => {
           e.preventDefault();
-          axios.post('/api/v1/login', { email, password })
-            .then((res) => {
+          axios.post('http://localhost:4000/api/v1/login', { name, password })
+          
+          .then((res) => {
               localStorage.setItem('circus-token', res.data.token);
-              setIsAuth(true);
-              setAuth(true);
+              setAuthenticated(true);
+              setAuth(true);            
             })
             .catch(() => {
               setError(true);
@@ -27,19 +28,19 @@ function Login({ setIsAuth }) {
             });
         }}
       >
-        <label htmlFor="email" className="has-float-label">
+        <label htmlFor="name" className="has-float-label">
           <input
-            id="email"
+            id="name"
             className="Login__form--input"
             type="text"
-            name="email"
-            placeholder="username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="name"
+            placeholder="namename"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             autoComplete="name"
             required
           />
-          <span>Email</span>
+          <span>name</span>
         </label>
         <label htmlFor="password" className="has-float-label">
           <input
@@ -58,11 +59,11 @@ function Login({ setIsAuth }) {
         <button
           type="submit"
           className={
-            !(email !== '' && password !== '')
+            !(name !== '' && password !== '')
               ? 'Login__form--submit disable'
               : 'Login__form--submit'
           }
-          disabled={!(email !== '' && password !== '')}
+          disabled={!(name !== '' && password !== '')}
         >
           Se connecter
         </button>
