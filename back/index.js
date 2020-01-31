@@ -3,16 +3,13 @@ const argon2 = require('argon2');
 const randomBytes = require('randombytes');
 const jwt = require('jsonwebtoken');
 const expressJWT = require('express-jwt');
-const { Admin } = require('./models/admin');
+const { Admin } = require('./models/');
 
 const app = express();
 const port = 4000;
 
 const secret = process.env.JWT_SECRET;
 //const isAuthenticated = expressJWT({ secret }); 
-
-
-
 
 //makes possible post
 app.use(express.json());
@@ -25,6 +22,7 @@ app.get('/', async (req, res) => {
 //login funciton plus authentication function
 app.post('/api/v1/login', async (req, res) => {
   const { name, password } = req.body;
+  
   try {
     const { token } = await authenticate({ name, password });
     return (res.send({ token }));
@@ -34,7 +32,10 @@ app.post('/api/v1/login', async (req, res) => {
 });
 
 const authenticate = async ({ name, password }) => {
+  console.log(name, password);
+  
   const user = await Admin.findOne({ where: { name } });
+
   if (!user) {
     throw new Error('User not found.');
   }
