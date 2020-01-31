@@ -22,6 +22,12 @@ app.get('/', async (req, res) => {
   res.send('Hello World!');
 });
 
+
+app.get('/api/v1/admins', async (req, res) => {
+  const users = await Admin.findAll();
+  res.send(users);
+});
+
 //login funciton plus authentication function
 app.post('/api/v1/login', async (req, res) => {
   const { name, password } = req.body;

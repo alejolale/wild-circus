@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import { Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
+import Administration from './components/Administration';
 
 
 const App = () => {
@@ -11,11 +12,14 @@ const App = () => {
 
   return (
     <Switch>
-      <Route exact path="/">
-        <div className="App">
-          <NavBar auth={authenticated}></NavBar>
-        </div>
-      </Route>
+      {
+        <Route exact path="/">
+          <div className="App">
+            <NavBar auth={authenticated}></NavBar>
+            {authenticated&&<Administration></Administration>}
+          </div>
+        </Route>
+        }
       <Route path="/login">
         <Login setAuthenticated={setAuthenticated}></Login>
       </Route>
